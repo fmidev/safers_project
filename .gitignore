@@ -1,0 +1,14 @@
+safers_config.py
+.env
+*~
+*.sqlite
+.DS_Store
+.directory
+.nfs*
+.py[cod]
+.idea/
+__pycache__/
+.spyproject/
+.vscode/
+README.html
+README_files/
