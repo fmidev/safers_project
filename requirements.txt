@@ -1,0 +1,23 @@
+# SAFERS python scripts requirements at safers.fmi.fi
+# gdal has to match `gdal-config --version`
+numpy
+scipy
+pandas
+# xarray==0.20.0
+xarray
+distributed
+dask
+cfgrib
+matplotlib
+boto3
+requests
+eccodes
+gdal==3.0.4
+netcdf4
+joblib
+python_dotenv
+# These are needed for plotting over map, only
+cartopy
+geopandas
+# This is nice to have
+# ipython

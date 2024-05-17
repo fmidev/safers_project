@@ -1,0 +1,19 @@
+### SAFERS crontab at safers.fmi.fi
+CRON_TZ=UTC
+SCRIPTS_DIR=/data/safers/scripts/safers_scripts
+LOG_DIR=/data/safers/logs
+# syntax min (0-59) hour (0-23) day (1-31) month (1-12) weekday (0-7)
+# Morning routines at 9:10 (7:10 UTC)
+10 07 * * * ${SCRIPTS_DIR}/morning.sh
+# Evening routines
+10 19 * * * ${SCRIPTS_DIR}/evening.sh
+# HRES processing using UTC time at 00 (for 1800), 06 (0000), 12 (0600), 18 (1200)
+01 00 * * * ${SCRIPTS_DIR}/HRES_to_SAFERS.sh yesterday 18 >> ${LOG_DIR}/HRES.log
+00 06 * * * ${SCRIPTS_DIR}/HRES_to_SAFERS.sh today 00 >> ${LOG_DIR}/HRES.log
+00 12 * * * ${SCRIPTS_DIR}/HRES_to_SAFERS.sh today 06 >> ${LOG_DIR}/HRES.log
+00 18 * * * ${SCRIPTS_DIR}/HRES_to_SAFERS.sh today 12 >> ${LOG_DIR}/HRES.log
+# ENS processing at 9 and 21
+00 09 * * * ${SCRIPTS_DIR}/ENS_to_SAFERS.sh today 00 >> ${LOG_DIR}/ENS.log
+50 20 * * * ${SCRIPTS_DIR}/ENS_to_SAFERS.sh today 12 >> ${LOG_DIR}/ENS.log
+# EXT processing Monday and Thursday
+00 01 * * 2,5 ${SCRIPTS_DIR}/EXT_to_SAFERS.sh yesterday 00 >> ${LOG_DIR}/EXT.log
